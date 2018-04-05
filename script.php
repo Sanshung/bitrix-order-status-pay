@@ -13,9 +13,10 @@ $order->setField('COMMENTS', 'Заказ был закрыт автоматич�
 
 $paymentCollection = $order->getPaymentCollection();
 foreach ($paymentCollection as $payment) {
+    $date = new \Bitrix\Main\Type\DateTime(date('d.m.Y', strtotime($orderData)), 'd.m.Y', new DateTimeZone('Asia/Yekaterinburg'));
     $payment->setFields(array(
         'PAY_VOUCHER_NUM' => $orderCheck,
-        'PAY_VOUCHER_DATE' => \Bitrix\Main\Type\DateTime::createFromTimestamp(strtotime($orderData)),
+        'PAY_VOUCHER_DATE' => $date,
     ));
     $p = $payment->setPaid('Y');
     $payment->save();
