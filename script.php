@@ -15,7 +15,7 @@ $paymentCollection = $order->getPaymentCollection();
 foreach ($paymentCollection as $payment) {
     $payment->setFields(array(
         'PAY_VOUCHER_NUM' => $orderCheck,
-        'PAY_VOUCHER_DATE' => \Bitrix\Main\Type\DateTime::createFromUserTime(date('d.m.Y H:i:s', strtotime($orderData))),
+        'PAY_VOUCHER_DATE' => \Bitrix\Main\Type\DateTime::createFromTimestamp(strtotime($orderData)),
     ));
     $p = $payment->setPaid('Y');
     $payment->save();
